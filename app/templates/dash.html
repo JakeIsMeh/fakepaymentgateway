@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pAyPI</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/badges.css">
+</head>
+<body class="container pt-3">
+    <div class="row">
+        <div class="col"><h1>pAyPI, a fake payment gateway API.</h1></div>
+        <div class="col-auto"><a class="btn btn-lg btn-info float-right" href="">Refresh</a></div>
+    </div><hr>
+    {% if db %}
+        <table class="table">
+            <thead>
+                <th>Reference</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Status</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {% for key in db %}
+                {% set order = db[key] %}
+                <th>{{ order.ref }}</th>
+                <td>${{ order.amt }}</td>
+                <td>
+                    {% set method = order.method %}
+                    {% if method in ['amex', 'cisa', 'paynow', 'nets', 'mc', 'maestro', 'gpay', 'apay', 'paypal'] %}
+                        <div class="pay-badge pay-badge-{{ method }}"></div>
+                    {% else %}
+                        {{ method }}
+                    {% endif %}
+                </td>
+                <td>{{ order.status }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="
+                            btn btn-success
+                            {% if order.status != 'Pending' %}disabled{% endif %}
+                        " href="/api/{{ order.ref }}/approve">Approve</a>
+                        <a class="
+                            btn btn-danger
+                            {% if order.status != 'Pending' %}disabled{% endif %}
+                        " href="/api/{{ order.ref }}/deny">Deny</a>
+                    </div>
+                </td>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No payments found.</h2>
+    {% endif %}
+</body>
+</html>

@@ -24,29 +24,31 @@
             <tbody>
                 {% for key in db %}
                 {% set order = db[key] %}
-                <th>{{ order.ref }}</th>
-                <td>${{ order.amt }}</td>
-                <td>
-                    {% set method = order.method %}
-                    {% if method in ['amex', 'cisa', 'paynow', 'nets', 'mc', 'maestro', 'gpay', 'apay', 'paypal'] %}
-                        <div class="pay-badge pay-badge-{{ method }}"></div>
-                    {% else %}
-                        {{ method }}
-                    {% endif %}
-                </td>
-                <td>{{ order.status }}</td>
-                <td>
-                    <div class="btn-group">
-                        <a class="
-                            btn btn-success
-                            {% if order.status != 'Pending' %}disabled{% endif %}
-                        " href="/api/{{ order.ref }}/approve">Approve</a>
-                        <a class="
-                            btn btn-danger
-                            {% if order.status != 'Pending' %}disabled{% endif %}
-                        " href="/api/{{ order.ref }}/deny">Deny</a>
-                    </div>
-                </td>
+                <tr>
+                    <th>{{ order.ref }}</th>
+                    <td>${{ order.amt }}</td>
+                    <td>
+                        {% set method = order.method %}
+                        {% if method in ['amex', 'cisa', 'paynow', 'nets', 'mc', 'maestro', 'gpay', 'apay', 'paypal'] %}
+                            <div class="pay-badge pay-badge-{{ method }}"></div>
+                        {% else %}
+                            {{ method }}
+                        {% endif %}
+                    </td>
+                    <td>{{ order.status }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="
+                                btn btn-success
+                                {% if order.status != 'Pending' %}disabled{% endif %}
+                            " href="/api/{{ order.ref }}/approve">Approve</a>
+                            <a class="
+                                btn btn-danger
+                                {% if order.status != 'Pending' %}disabled{% endif %}
+                            " href="/api/{{ order.ref }}/deny">Deny</a>
+                        </div>
+                    </td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>

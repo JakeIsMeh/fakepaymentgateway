@@ -29,7 +29,7 @@
                     <td>${{ order.amt }}</td>
                     <td>
                         {% set method = order.method %}
-                        {% if method in ['amex', 'cisa', 'paynow', 'nets', 'mc', 'maestro', 'gpay', 'apay', 'paypal'] %}
+                        {% if method in ['amex', 'visa', 'paynow', 'nets', 'mc', 'maestro', 'gpay', 'apay', 'paypal'] %}
                             <div class="pay-badge pay-badge-{{ method }}"></div>
                         {% else %}
                             {{ method }}

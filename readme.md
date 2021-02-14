@@ -1,7 +1,7 @@
 # pAyPI, a fake payment gateway.
 
 ## installation
-```bat
+```sh
 git clone https://github.com/JakeIsMeh/fakepaymentgateway.git
 cd appdevproj
 # --upgrade-deps only works on python 3.8+

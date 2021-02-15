@@ -32,7 +32,7 @@ def addOrder():
 def approveOrder(ref, action):
     print(action)
 
-    if action is not 'approve' and not 'deny':
+    if action != 'approve' and action != 'deny':
         return ('Unknown action', 400)
 
     if action == 'approve':

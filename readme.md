@@ -3,7 +3,7 @@
 ## installation
 ```sh
 git clone https://github.com/JakeIsMeh/fakepaymentgateway.git
-cd appdevproj
+cd fakepaymentgateway
 # --upgrade-deps only works on python 3.8+
 py -m venv venv --upgrade-deps # remember to activate venv immediately
 . venv/Scripts/activate # activating venv
